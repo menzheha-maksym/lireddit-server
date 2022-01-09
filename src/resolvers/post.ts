@@ -5,7 +5,7 @@ import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 @Resolver()
 export class PostResolver {
     @Query(() => [Post])
-    posts(
+    async posts(
         @Ctx() { em }: MyContext
     ): Promise<Post[]> {
         return em.find(Post, {});
@@ -39,7 +39,7 @@ export class PostResolver {
         if (!post) {
             return null;
         }
-        if(typeof title !== 'undefined') {
+        if (typeof title !== 'undefined') {
             post.title = title;
             await em.persistAndFlush(post);
         }
@@ -51,7 +51,7 @@ export class PostResolver {
         @Arg("id") id: number,
         @Ctx() { em }: MyContext
     ): Promise<boolean> {
-        await em.nativeDelete(Post, {id});
+        await em.nativeDelete(Post, { id });
         return true;
     }
 }
