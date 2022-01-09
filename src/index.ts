@@ -15,7 +15,6 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-co
 import cors from 'cors';
 
 const main = async () => {
-
     const orm = await MikroORM.init(mikroOrmConfig);
     await orm.getSchemaGenerator().updateSchema();
 
