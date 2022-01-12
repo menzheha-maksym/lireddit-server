@@ -15,6 +15,7 @@ import { createConnection } from 'typeorm';
 import { Post } from "./entities/Post";
 import { User } from "./entities/User";
 import path from "path";
+import { Updoot } from "./entities/Updoot";
 
 
 const main = async () => {
@@ -29,6 +30,7 @@ const main = async () => {
         entities: [
             Post, 
             User,
+            Updoot
         ]
     });
 
