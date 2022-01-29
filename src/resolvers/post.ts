@@ -97,7 +97,7 @@ export class PostResolver {
 
         const replacements: any[] = [realLimitPlusOne];
 
-        if(req.session.userId) {
+        if (req.session.userId) {
             replacements.push(req.session.userId);
         }
 
@@ -143,14 +143,17 @@ export class PostResolver {
         // }
         // const posts = await qb.getMany()
 
-        return { posts: posts.slice(0, realLimit), hasMore: posts.length === realLimitPlusOne };
+        return {
+            posts: posts.slice(0, realLimit),
+            hasMore: posts.length === realLimitPlusOne
+        };
     }
 
     @Query(() => Post, { nullable: true })
     post(
-        @Arg("id") id: number,
+        @Arg("id", () => Int) id: number,
     ): Promise<Post | undefined> {
-        return Post.findOne(id);
+        return Post.findOne(id, { relations: ["creator"] });
     }
 
     @Mutation(() => Post)
