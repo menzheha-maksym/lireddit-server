@@ -17,6 +17,7 @@ import { User } from "./entities/User";
 import path from "path";
 import { Updoot } from "./entities/Updoot";
 import { createUserLoader } from "./utils/createUserLoader";
+import { createUpdootLoader } from "./utils/createUpdootLoader";
 
 
 const main = async () => {
@@ -78,7 +79,13 @@ const main = async () => {
             ],
             validate: false,
         }),
-        context: ({ req, res }) => ({ req, res, redis, userLoader: createUserLoader(), }),
+        context: ({ req, res }) => ({
+            req,
+            res,
+            redis,
+            userLoader: createUserLoader(),
+            updootLoader: createUpdootLoader(),
+        }),
         plugins: [
             ApolloServerPluginLandingPageGraphQLPlayground(),
         ]
